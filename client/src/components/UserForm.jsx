@@ -1,0 +1,53 @@
+import { useState } from 'react';
+import { usersAPI } from '../api';
+
+function UserForm({ onClose, onSuccess }) {
+  const [formData, setFormData] = useState({
+    name: '',
+  });
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      await usersAPI.create(formData);
+      onSuccess();
+      setFormData({ name: '' });
+    } catch (error) {
+      console.error('Error creating user:', error);
+      alert('Error creating user');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="form-container">
+      <h2>Add New User</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label>User Name *</label>
+          <input
+            type="text"
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            placeholder="Enter user name"
+            required
+          />
+        </div>
+        <div className="actions-bar">
+          <button type="submit" className="btn-primary" disabled={loading}>
+            {loading ? 'Creating...' : 'Create User'}
+          </button>
+          <button type="button" className="btn-secondary" onClick={onClose}>
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+}
+
+export default UserForm;
