@@ -25,7 +25,39 @@ function UserForm({ onClose, onSuccess }) {
 
   return (
     <div className="form-container">
-      <h2>Add New User</h2>
+      <button 
+        type="button"
+        onClick={onClose}
+        style={{
+          position: 'absolute',
+          top: '1rem',
+          right: '1rem',
+          background: 'transparent',
+          border: 'none',
+          fontSize: '1.5rem',
+          cursor: 'pointer',
+          color: 'var(--color-text-tertiary)',
+          padding: '0.25rem',
+          width: '2rem',
+          height: '2rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderRadius: '50%',
+          transition: 'all 0.2s ease'
+        }}
+        onMouseEnter={(e) => {
+          e.target.style.background = 'var(--color-bg-surface)';
+          e.target.style.color = 'var(--color-danger)';
+        }}
+        onMouseLeave={(e) => {
+          e.target.style.background = 'transparent';
+          e.target.style.color = 'var(--color-text-tertiary)';
+        }}
+      >
+        ×
+      </button>
+      <h2>👤 Add New User</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>User Name *</label>
@@ -39,7 +71,7 @@ function UserForm({ onClose, onSuccess }) {
         </div>
         <div className="actions-bar">
           <button type="submit" className="btn-primary" disabled={loading}>
-            {loading ? 'Creating...' : 'Create User'}
+            {loading ? '⏳ Creating...' : '✨ Create User'}
           </button>
           <button type="button" className="btn-secondary" onClick={onClose}>
             Cancel

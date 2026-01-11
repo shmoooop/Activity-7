@@ -91,6 +91,7 @@ function Dashboard() {
     return (
       <div className="container">
         <div className="loading-state">
+          <div className="loading-spinner"></div>
           <h2>Loading...</h2>
         </div>
       </div>
@@ -101,13 +102,6 @@ function Dashboard() {
   if (selectedProject) {
     return (
       <>
-        <div className="nav-bar">
-          <div className="nav-bar-content">
-            <a href="#" className="nav-title" onClick={(e) => { e.preventDefault(); handleBackToProjects(); }}>
-              Task Management
-            </a>
-          </div>
-        </div>
         <div className="container">
           <button className="btn-text back-button" onClick={handleBackToProjects}>
             ← Back to Projects
@@ -122,27 +116,35 @@ function Dashboard() {
 
           <div className="actions-bar">
             <button className="btn-primary" onClick={() => setShowTaskForm(true)}>
-              Add New Task
+              ➕ Add New Task
             </button>
             <button className="btn-secondary" onClick={() => setShowUserForm(true)}>
-              Add User
+              👤 Add User
             </button>
           </div>
 
           {showTaskForm && (
-            <TaskForm
-              projectId={selectedProject.id}
-              users={users}
-              onClose={() => setShowTaskForm(false)}
-              onSuccess={handleTaskCreated}
-            />
+            <div className="form-overlay" onClick={(e) => {
+              if (e.target === e.currentTarget) setShowTaskForm(false);
+            }}>
+              <TaskForm
+                projectId={selectedProject.id}
+                users={users}
+                onClose={() => setShowTaskForm(false)}
+                onSuccess={handleTaskCreated}
+              />
+            </div>
           )}
 
           {showUserForm && (
-            <UserForm
-              onClose={() => setShowUserForm(false)}
-              onSuccess={handleUserCreated}
-            />
+            <div className="form-overlay" onClick={(e) => {
+              if (e.target === e.currentTarget) setShowUserForm(false);
+            }}>
+              <UserForm
+                onClose={() => setShowUserForm(false)}
+                onSuccess={handleUserCreated}
+              />
+            </div>
           )}
 
           <TaskList tasks={tasks} onTaskDeleted={() => loadTasks(selectedProject.id)} />
@@ -154,13 +156,6 @@ function Dashboard() {
   // Show projects view
   return (
     <>
-      <div className="nav-bar">
-        <div className="nav-bar-content">
-          <a href="#" className="nav-title" onClick={(e) => e.preventDefault()}>
-            Task Management
-          </a>
-        </div>
-      </div>
       <div className="container">
         <div className="page-header">
           <h1 className="page-title">Projects</h1>
@@ -169,31 +164,39 @@ function Dashboard() {
         
         <div className="actions-bar">
           <button className="btn-primary" onClick={() => setShowProjectForm(true)}>
-            Create New Project
+            ➕ Create New Project
           </button>
           <button className="btn-secondary" onClick={() => setShowUserForm(true)}>
-            Add User
+            👤 Add User
           </button>
         </div>
 
         {showProjectForm && (
-          <ProjectForm
-            onClose={() => setShowProjectForm(false)}
-            onSuccess={handleProjectCreated}
-          />
+          <div className="form-overlay" onClick={(e) => {
+            if (e.target === e.currentTarget) setShowProjectForm(false);
+          }}>
+            <ProjectForm
+              onClose={() => setShowProjectForm(false)}
+              onSuccess={handleProjectCreated}
+            />
+          </div>
         )}
 
         {showUserForm && (
-          <UserForm
-            onClose={() => setShowUserForm(false)}
-            onSuccess={handleUserCreated}
-          />
+          <div className="form-overlay" onClick={(e) => {
+            if (e.target === e.currentTarget) setShowUserForm(false);
+          }}>
+            <UserForm
+              onClose={() => setShowUserForm(false)}
+              onSuccess={handleUserCreated}
+            />
+          </div>
         )}
 
         <div className="project-list">
           {projects.length === 0 ? (
             <div className="empty-state">
-              <p>No projects yet. Create your first project!</p>
+              <p>No projects yet. Create your first project! 🚀</p>
             </div>
           ) : (
             projects.map((project) => (

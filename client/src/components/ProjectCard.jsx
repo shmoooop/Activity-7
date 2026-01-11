@@ -7,6 +7,11 @@ function ProjectCard({ project, onClick }) {
       {project.description && (
         <p>{project.description}</p>
       )}
+      {!project.description && (
+        <p style={{ color: 'var(--color-text-tertiary)', fontStyle: 'italic' }}>
+          No description provided
+        </p>
+      )}
       <div className="project-meta">
         {taskCount} {taskCount === 1 ? 'task' : 'tasks'}
       </div>

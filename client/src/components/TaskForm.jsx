@@ -60,7 +60,39 @@ function TaskForm({ projectId, users, onClose, onSuccess }) {
   if (availableUsers.length === 0) {
     return (
       <div className="form-container">
-        <p>Please create a user first before creating tasks.</p>
+        <button 
+          type="button"
+          onClick={onClose}
+          style={{
+            position: 'absolute',
+            top: '1rem',
+            right: '1rem',
+            background: 'transparent',
+            border: 'none',
+            fontSize: '1.5rem',
+            cursor: 'pointer',
+            color: 'var(--color-text-tertiary)',
+            padding: '0.25rem',
+            width: '2rem',
+            height: '2rem',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: '50%',
+            transition: 'all 0.2s ease'
+          }}
+          onMouseEnter={(e) => {
+            e.target.style.background = 'var(--color-bg-surface)';
+            e.target.style.color = 'var(--color-danger)';
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.background = 'transparent';
+            e.target.style.color = 'var(--color-text-tertiary)';
+          }}
+        >
+          ×
+        </button>
+        <p>⚠️ Please create a user first before creating tasks.</p>
         <div className="actions-bar">
           <button className="btn-secondary" onClick={onClose}>
             Close
@@ -72,7 +104,39 @@ function TaskForm({ projectId, users, onClose, onSuccess }) {
 
   return (
     <div className="form-container">
-      <h2>Create New Task</h2>
+      <button 
+        type="button"
+        onClick={onClose}
+        style={{
+          position: 'absolute',
+          top: '1rem',
+          right: '1rem',
+          background: 'transparent',
+          border: 'none',
+          fontSize: '1.5rem',
+          cursor: 'pointer',
+          color: 'var(--color-text-tertiary)',
+          padding: '0.25rem',
+          width: '2rem',
+          height: '2rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderRadius: '50%',
+          transition: 'all 0.2s ease'
+        }}
+        onMouseEnter={(e) => {
+          e.target.style.background = 'var(--color-bg-surface)';
+          e.target.style.color = 'var(--color-danger)';
+        }}
+        onMouseLeave={(e) => {
+          e.target.style.background = 'transparent';
+          e.target.style.color = 'var(--color-text-tertiary)';
+        }}
+      >
+        ×
+      </button>
+      <h2>✅ Create New Task</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Task Title *</label>
@@ -124,7 +188,7 @@ function TaskForm({ projectId, users, onClose, onSuccess }) {
         </div>
         <div className="actions-bar">
           <button type="submit" className="btn-primary" disabled={loading}>
-            {loading ? 'Creating...' : 'Create Task'}
+            {loading ? '⏳ Creating...' : '✨ Create Task'}
           </button>
           <button type="button" className="btn-secondary" onClick={onClose}>
             Cancel

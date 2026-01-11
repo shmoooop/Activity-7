@@ -46,7 +46,7 @@ function TaskList({ tasks, onTaskDeleted }) {
           <h2>Tasks</h2>
         </div>
         <div className="empty-state">
-          <p>No tasks in this project yet. Create your first task!</p>
+          <p>No tasks in this project yet. Create your first task! 🚀</p>
         </div>
       </div>
     );
